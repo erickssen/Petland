@@ -1,0 +1,79 @@
+
+<div class="container col">
+
+    <mat-form-field appearance="fill">
+      <mat-label>location</mat-label>
+      <mat-select [formControl]="location" multiple>
+        <mat-select-trigger>
+          {{location.value ? location.value[0] : ''}}
+          <span *ngIf="location.value?.length > 1" class="example-additional-selection">
+            (+{{location.value.length - 1}} {{location.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let location of locationItems" [value]="location">{{location}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>petType</mat-label>
+      <mat-select [formControl]="petType" multiple>
+        <mat-select-trigger>
+          {{petType.value ? petType.value[0] : ''}}
+          <span *ngIf="petType.value?.length > 1" class="example-additional-selection">
+            (+{{petType.value.length - 1}} {{petType.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let petType of petTypeItems" [value]="petType">{{petType}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Breed</mat-label>
+      <mat-select [formControl]="puppie" multiple>
+        <mat-select-trigger>
+          {{puppie.value ? puppie.value[0] : ''}}
+          <span *ngIf="puppie.value?.length > 1" class="example-additional-selection">
+            (+{{puppie.value.length - 1}} {{puppie.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let puppie of puppies | unique: 'BreedName'" [value]="puppie">{{puppie.BreedName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select [formControl]="gender" multiple>
+        <mat-select-trigger>
+          {{gender.value ? gender.value[0] : ''}}
+          <span *ngIf="gender.value?.length > 1" class="example-additional-selection">
+            (+{{gender.value.length - 1}} {{gender.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let gender of genderItems" [value]="gender">{{gender}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="container">
+    <div class="row">
+          <div class="col-10">
+                  <mat-grid-list cols="3" rowHeight="420px">
+                      <mat-grid-tile *ngFor="let puppie of puppies">
+                                <mat-card class="example-card">
+                                  <img [src]="puppie?.Photo?.BaseUrl + puppie.Photo?.Size300">
+
+                                    <mat-card-header>
+                                      <mat-card-subtitle>{{ puppie?.PetType }} * {{ puppie?.Gender }} * REF ID:{{ puppie?.PetId }} </mat-card-subtitle>
+                                      <mat-card-title>{{ puppie?.PetName }}</mat-card-title>
+                                      <mat-card-subtitle>{{ puppie?.BreedName }}</mat-card-subtitle>
+                                      <mat-card-subtitle>Location: {{ puppie?.Location }}</mat-card-subtitle>
+                                    </mat-card-header>
+
+                                </mat-card>
+                        </mat-grid-tile>
+                  </mat-grid-list>
+              </div>
+      </div>
+</div>
